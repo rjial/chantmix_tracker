@@ -159,6 +159,30 @@ function Index() {
                   key={chant.id}
                   className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
                 >
+                  {/* YouTube Thumbnail */}
+                  <div className="relative aspect-video bg-gray-200 dark:bg-gray-700">
+                    <img
+                      src={`https://img.youtube.com/vi/${chant.id}/maxresdefault.jpg`}
+                      alt={`${chant.title} thumbnail`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to medium quality thumbnail if maxres fails
+                        const target = e.target as HTMLImageElement;
+                        if (target.src.includes('maxresdefault')) {
+                          target.src = `https://img.youtube.com/vi/${chant.id}/hqdefault.jpg`;
+                        }
+                      }}
+                    />
+                    {/* Play Icon Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-red-600 text-white rounded-full p-3">
+                        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-lg font-semibold text-gray-800 dark:text-white line-clamp-2 flex-1">
@@ -186,13 +210,13 @@ function Index() {
                           {chant.tags.slice(0, 3).map((tag, index) => (
                             <span
                               key={index}
-                              className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
+                              className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full"
                             >
                               {tag}
                             </span>
                           ))}
                           {chant.tags.length > 3 && (
-                            <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                            <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs px-2 py-1 rounded-full">
                               +{chant.tags.length - 3}
                             </span>
                           )}

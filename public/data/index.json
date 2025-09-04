@@ -7,6 +7,14 @@
       "contributor": "Rizal Abdul Basith",
       "tags": ["pinku", "rimu", "titik temu"],
       "description": ""
+    },
+    {
+      "id": "B0uZL_ZvGEM",
+      "title": "Triangle Dreamer",
+      "file": "chants/B0uZL_ZvGEM.json",
+      "contributor": "Rizal Abdul Basith",
+      "tags": ["nijicon", "triangledreamer", "triangle", "dreamer"],
+      "description": "Sample chant mix for demonstration"
     }
   ]
 }

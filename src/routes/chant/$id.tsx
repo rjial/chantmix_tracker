@@ -4,6 +4,7 @@ import YouTubePlayerComponent from '@/components/YouTubePlayer'
 import { useYouTubePlayer } from '@/hooks/useYouTubePlayer'
 import type { LyricLine } from '@/types'
 import { YT_PLAYER_STATE } from '@/types'
+import { getAssetPath } from '@/utils/basePath'
 
 export const Route = createFileRoute('/chant/$id')({
   component: ChantPlayer,
@@ -50,7 +51,7 @@ function ChantPlayer() {
   useEffect(() => {
     const fetchChantData = async () => {
       try {
-        const response = await fetch(`/data/chants/${id}.json`)
+        const response = await fetch(getAssetPath(`/data/chants/${id}.json`))
         if (!response.ok) {
           throw new Error('Chant not found')
         }

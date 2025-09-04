@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
+import { getAssetPath } from '@/utils/basePath'
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -27,7 +28,7 @@ function Index() {
   useEffect(() => {
     const fetchChants = async () => {
       try {
-        const response = await fetch('/data/index.json')
+        const response = await fetch(getAssetPath('/data/index.json'))
         if (!response.ok) {
           throw new Error('Failed to fetch chants data')
         }

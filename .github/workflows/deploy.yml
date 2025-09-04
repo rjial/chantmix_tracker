@@ -1,0 +1,48 @@
+name: Build and Deploy to rjial/port-rjial
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Generate route tree
+        run: pnpm exec tsr generate
+        
+      - name: Build application
+        run: pnpm run build
+        
+      - name: Deploy to target repository
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          external_repository: rjial/port-rjial
+          publish_branch: youtube-lyric-app
+          publish_dir: ./dist
+          commit_message: 'Deploy YouTube Lyric App from ${{ github.sha }}'
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          cname: false # Set to your domain if you have one

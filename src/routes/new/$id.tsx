@@ -26,6 +26,7 @@ function NewChantWithId() {
   const [chantTags, setChantTags] = useState<string[]>([]);
   const [showChantInfoModal, setShowChantInfoModal] = useState(false);
   const [currentLyricIndex, setCurrentLyricIndex] = useState(-1);
+  const [isEditorMode, setIsEditorMode] = useState(true);
 
   const {
     playerState,
@@ -513,95 +514,171 @@ function NewChantWithId() {
 
           {/* Right Column - Lyrics List */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+            <div className={`rounded-lg shadow-md ${
+              isEditorMode 
+                ? 'bg-white dark:bg-gray-800'
+                : 'bg-black dark:bg-black overflow-hidden'
+            }`}>
               <div className="p-6 border-b dark:border-gray-700">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Lyrics ({lyrics.length})</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                      Click on any lyric to jump to that moment
-                    </p>
+                    <h3 className={`text-lg font-semibold ${
+                      isEditorMode 
+                        ? 'text-gray-800 dark:text-white'
+                        : 'text-white'
+                    }`}>
+                      {isEditorMode 
+                        ? `Lyrics (${lyrics.length})`
+                        : `🎤 Karaoke (${lyrics.length})`
+                      }
+                    </h3>
+                    {isEditorMode && (
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Click on any lyric to jump to that moment
+                      </p>
+                    )}
                   </div>
                   <div className="flex gap-2">
+                    {isEditorMode && (
+                      <button
+                        onClick={() => setShowJsonLoader(true)}
+                        className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-1 rounded text-sm transition-colors"
+                      >
+                        📁 Load JSON
+                      </button>
+                    )}
                     <button
-                      onClick={() => setShowJsonLoader(true)}
-                      className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-1 rounded text-sm transition-colors"
+                      onClick={() => setIsEditorMode(!isEditorMode)}
+                      className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                        isEditorMode 
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                          : 'bg-purple-600 hover:bg-purple-700 text-white'
+                      }`}
                     >
-                      📁 Load JSON
+                      {isEditorMode ? '👁️ View Mode' : '✏️ Edit Mode'}
                     </button>
                   </div>
                 </div>
               </div>
               
-              <div className="p-6 h-[600px] overflow-y-auto scrollbar-hide">
+              <div className={`${isEditorMode ? 'p-6' : ''} h-[600px] overflow-y-auto scrollbar-hide`}>
                 {lyrics.length === 0 ? (
-                  <p className="text-gray-500 dark:text-gray-400 text-center py-8">No lyrics added yet. Start by adding some lyrics!</p>
+                  <div className="flex items-center justify-center h-full">
+                    <div className="text-center">
+                      <div className="text-6xl mb-4">🎵</div>
+                      <p className={`text-lg ${isEditorMode ? 'text-gray-500 dark:text-gray-400' : 'text-gray-400'}`}>
+                        {isEditorMode ? 'No lyrics added yet. Start by adding some lyrics!' : 'No lyrics available'}
+                      </p>
+                    </div>
+                  </div>
                 ) : (
-                  <div className="space-y-3">
-                    {lyrics.sort((a, b) => a.startTime - b.startTime).map((lyric, index) => {
-                      const isCurrentLyric = currentLyricIndex === index;
-                      return (
-                        <div
-                          key={lyric.id}
-                          id={`lyric-${lyric.id}`}
-                          className={`border rounded-lg p-4 transition-all duration-300 cursor-pointer ${
-                            isCurrentLyric
-                              ? 'border-blue-500 bg-blue-100 dark:bg-blue-900 border-l-4 border-l-blue-500'
-                              : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600'
-                          }`}
-                          onClick={() => seekTo(lyric.startTime)}
-                        >
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <p className={`font-medium ${
-                                isCurrentLyric 
-                                  ? 'text-blue-900 dark:text-blue-100' 
-                                  : 'text-gray-800 dark:text-white'
-                              }`}>
-                                {lyric.text}
-                              </p>
-                              <p className={`text-sm ${
-                                isCurrentLyric 
-                                  ? 'text-blue-700 dark:text-blue-300' 
-                                  : 'text-gray-500 dark:text-gray-400'
-                              }`}>
-                                {formatTime(lyric.startTime)} - {formatTime(lyric.endTime)}
-                              </p>
-                            </div>
-                            <div className="flex gap-1 ml-2">
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  seekTo(lyric.startTime);
-                                }}
-                                className="bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs transition-colors"
-                              >
-                                Jump
-                              </button>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  editLyric(lyric);
-                                }}
-                                className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-xs transition-colors"
-                              >
-                                Edit
-                              </button>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  deleteLyric(lyric.id);
-                                }}
-                                className="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded text-xs transition-colors"
-                              >
-                                Delete
-                              </button>
+                  isEditorMode ? (
+                    // Editor Mode - Card-based layout
+                    <div className="space-y-3">
+                      {lyrics.sort((a, b) => a.startTime - b.startTime).map((lyric, index) => {
+                        const isCurrentLyric = currentLyricIndex === index;
+                        return (
+                          <div
+                            key={lyric.id}
+                            id={`lyric-${lyric.id}`}
+                            className={`border rounded-lg p-4 transition-all duration-300 cursor-pointer ${
+                              isCurrentLyric
+                                ? 'border-blue-500 bg-blue-100 dark:bg-blue-900 border-l-4 border-l-blue-500'
+                                : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600'
+                            }`}
+                            onClick={() => seekTo(lyric.startTime)}
+                          >
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <p className={`font-medium ${
+                                  isCurrentLyric 
+                                    ? 'text-blue-900 dark:text-blue-100' 
+                                    : 'text-gray-800 dark:text-white'
+                                }`}>
+                                  {lyric.text}
+                                </p>
+                                <p className={`text-sm ${
+                                  isCurrentLyric 
+                                    ? 'text-blue-700 dark:text-blue-300' 
+                                    : 'text-gray-500 dark:text-gray-400'
+                                }`}>
+                                  {formatTime(lyric.startTime)} - {formatTime(lyric.endTime)}
+                                </p>
+                              </div>
+                              <div className="flex gap-1 ml-2">
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    seekTo(lyric.startTime);
+                                  }}
+                                  className="bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs transition-colors"
+                                >
+                                  Jump
+                                </button>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    editLyric(lyric);
+                                  }}
+                                  className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-xs transition-colors"
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    deleteLyric(lyric.id);
+                                  }}
+                                  className="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded text-xs transition-colors"
+                                >
+                                  Delete
+                                </button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    // View Mode - Karaoke style
+                    <div className="flex flex-col justify-center min-h-full py-48 px-8 bg-gradient-to-b from-black via-gray-900 to-black">
+                      {lyrics.sort((a, b) => a.startTime - b.startTime).map((lyric, index) => {
+                        const isCurrentLyric = currentLyricIndex === index;
+                        const isPrevious = index < currentLyricIndex;
+                        const isNext = index > currentLyricIndex;
+                        
+                        return (
+                          <div
+                            key={lyric.id}
+                            id={`lyric-${lyric.id}`}
+                            onClick={() => seekTo(lyric.startTime)}
+                            className={`cursor-pointer transition-all duration-500 ease-in-out text-center py-3 px-4 ${
+                              isCurrentLyric 
+                                ? 'text-2xl md:text-3xl font-bold text-white drop-shadow-lg transform scale-105' 
+                                : isPrevious
+                                ? 'text-lg text-gray-500 opacity-60'
+                                : isNext
+                                ? 'text-lg text-gray-400 opacity-70 hover:text-gray-300 hover:opacity-90'
+                                : 'text-lg text-gray-400 opacity-70 hover:text-gray-300 hover:opacity-90'
+                            }`}
+                            style={{
+                              textShadow: isCurrentLyric 
+                                ? '0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4), 2px 2px 4px rgba(0,0,0,0.8)' 
+                                : '1px 1px 2px rgba(0,0,0,0.8)',
+                              lineHeight: isCurrentLyric ? '1.2' : '1.4'
+                            }}
+                          >
+                            {lyric.text}
+                            {isCurrentLyric && (
+                              <div className="text-xs text-blue-300 mt-2 font-normal opacity-75">
+                                {formatTime(lyric.startTime)} - {formatTime(lyric.endTime)}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )
                 )}
               </div>
             </div>

@@ -109,11 +109,11 @@
       "id": "1756998052219",
       "text": "(Member Call)",
       "startTime": 49705,
-      "endTime": 50053,
+      "endTime": 50825,
       "startTimeFormatted": "0:49.705",
-      "endTimeFormatted": "0:50.053",
-      "duration": 348,
-      "durationFormatted": "0:00.348"
+      "endTimeFormatted": "0:50.825",
+      "duration": 1120,
+      "durationFormatted": "0:01.120"
     },
     {
       "id": "1756998087553",
@@ -134,6 +134,246 @@
       "endTimeFormatted": "1:01.767",
       "duration": 849,
       "durationFormatted": "0:00.849"
+    },
+    {
+      "id": "1757002106138",
+      "text": "Omae ga Ichiban! x3",
+      "startTime": 61927,
+      "endTime": 66330,
+      "startTimeFormatted": "1:01.927",
+      "endTimeFormatted": "1:06.330",
+      "duration": 4403,
+      "durationFormatted": "0:04.403"
+    },
+    {
+      "id": "1757002129214",
+      "text": "(Member Call)",
+      "startTime": 66418,
+      "endTime": 67367,
+      "startTimeFormatted": "1:06.418",
+      "endTimeFormatted": "1:07.367",
+      "duration": 949,
+      "durationFormatted": "0:00.949"
+    },
+    {
+      "id": "1757002172804",
+      "text": "Ore no x2",
+      "startTime": 81336,
+      "endTime": 82691,
+      "startTimeFormatted": "1:21.336",
+      "endTimeFormatted": "1:22.691",
+      "duration": 1355,
+      "durationFormatted": "0:01.355"
+    },
+    {
+      "id": "1757002208060",
+      "text": "(Member Call)",
+      "startTime": 82861,
+      "endTime": 84111,
+      "startTimeFormatted": "1:22.861",
+      "endTimeFormatted": "1:24.111",
+      "duration": 1250,
+      "durationFormatted": "0:01.250"
+    },
+    {
+      "id": "1757002260948",
+      "text": "Oooh! *clap 2x* Oi! 4x",
+      "startTime": 84127,
+      "endTime": 89342,
+      "startTimeFormatted": "1:24.127",
+      "endTimeFormatted": "1:29.342",
+      "duration": 5215,
+      "durationFormatted": "0:05.215"
+    },
+    {
+      "id": "1757002325613",
+      "text": "Taiga! Faiya! Saiba! Faiba!",
+      "startTime": 92447,
+      "endTime": 94948,
+      "startTimeFormatted": "1:32.447",
+      "endTimeFormatted": "1:34.948",
+      "duration": 2501,
+      "durationFormatted": "0:02.501"
+    },
+    {
+      "id": "1757002387993",
+      "text": "Taiga! Faiya! Saiba! Faiba! Daiba! Vaiba! Jyaa jyaa!",
+      "startTime": 95268,
+      "endTime": 97223,
+      "startTimeFormatted": "1:35.268",
+      "endTimeFormatted": "1:37.223",
+      "duration": 1955,
+      "durationFormatted": "0:01.955"
+    },
+    {
+      "id": "1757002440519",
+      "text": "(Furikopi)",
+      "startTime": 97225,
+      "endTime": 109046,
+      "startTimeFormatted": "1:37.225",
+      "endTimeFormatted": "1:49.046",
+      "duration": 11821,
+      "durationFormatted": "0:11.821"
+    },
+    {
+      "id": "1757002531328",
+      "text": "*clap 3x* Oi!",
+      "startTime": 109066,
+      "endTime": 114318,
+      "startTimeFormatted": "1:49.066",
+      "endTimeFormatted": "1:54.318",
+      "duration": 5252,
+      "durationFormatted": "0:05.252"
+    },
+    {
+      "id": "1757002560184",
+      "text": "FuFuFu!",
+      "startTime": 118734,
+      "endTime": 119638,
+      "startTimeFormatted": "1:58.734",
+      "endTimeFormatted": "1:59.638",
+      "duration": 904,
+      "durationFormatted": "0:00.904"
+    },
+    {
+      "id": "1757002797496",
+      "text": "(Furikopi)",
+      "startTime": 119999,
+      "endTime": 130249,
+      "startTimeFormatted": "1:59.999",
+      "endTimeFormatted": "2:10.249",
+      "duration": 10250,
+      "durationFormatted": "0:10.250"
+    },
+    {
+      "id": "1757002860408",
+      "text": "*clap 3x* Oi!",
+      "startTime": 131275,
+      "endTime": 135076,
+      "startTimeFormatted": "2:11.275",
+      "endTimeFormatted": "2:15.076",
+      "duration": 3801,
+      "durationFormatted": "0:03.801"
+    },
+    {
+      "id": "1757002897858",
+      "text": "Jya! Jya! Jya! Jya!",
+      "startTime": 140170,
+      "endTime": 141571,
+      "startTimeFormatted": "2:20.170",
+      "endTimeFormatted": "2:21.571",
+      "duration": 1401,
+      "durationFormatted": "0:01.401"
+    },
+    {
+      "id": "1757002923655",
+      "text": "Urya oi! x4",
+      "startTime": 145052,
+      "endTime": 147812,
+      "startTimeFormatted": "2:25.052",
+      "endTimeFormatted": "2:27.812",
+      "duration": 2760,
+      "durationFormatted": "0:02.760"
+    },
+    {
+      "id": "1757002960363",
+      "text": "*clap 4x*",
+      "startTime": 147933,
+      "endTime": 149184,
+      "startTimeFormatted": "2:27.933",
+      "endTimeFormatted": "2:29.184",
+      "duration": 1251,
+      "durationFormatted": "0:01.251"
+    },
+    {
+      "id": "1757003965495",
+      "text": "Jyaa Ikuzo!",
+      "startTime": 149288,
+      "endTime": 150424,
+      "startTimeFormatted": "2:29.288",
+      "endTimeFormatted": "2:30.424",
+      "duration": 1136,
+      "durationFormatted": "0:01.136"
+    },
+    {
+      "id": "1757004096266",
+      "text": "Ore to omae no akai ito!",
+      "startTime": 150767,
+      "endTime": 152818,
+      "startTimeFormatted": "2:30.767",
+      "endTimeFormatted": "2:32.818",
+      "duration": 2051,
+      "durationFormatted": "0:02.051"
+    },
+    {
+      "id": "1757004122115",
+      "text": "Ore no ore no (Member call)",
+      "startTime": 153233,
+      "endTime": 156135,
+      "startTimeFormatted": "2:33.233",
+      "endTimeFormatted": "2:36.135",
+      "duration": 2902,
+      "durationFormatted": "0:02.902"
+    },
+    {
+      "id": "1757004138433",
+      "text": "Iyaa! ¡Iyaa! ¡Iyaa! ¡Iyaa! ¡Iyaa! ¡Iyaa! ¡Iyaa! ¡Iyaa!",
+      "startTime": 156423,
+      "endTime": 158973,
+      "startTimeFormatted": "2:36.423",
+      "endTimeFormatted": "2:38.973",
+      "duration": 2550,
+      "durationFormatted": "0:02.550"
+    },
+    {
+      "id": "1757004969191",
+      "text": "Ore no (Member call)",
+      "startTime": 159104,
+      "endTime": 161593,
+      "startTimeFormatted": "2:39.104",
+      "endTimeFormatted": "2:41.593",
+      "duration": 2489,
+      "durationFormatted": "0:02.489"
+    },
+    {
+      "id": "1757005379371",
+      "text": "Sain! ¡Kosain! ¡Tanjento!",
+      "startTime": 161806,
+      "endTime": 164355,
+      "startTimeFormatted": "2:41.806",
+      "endTimeFormatted": "2:44.355",
+      "duration": 2549,
+      "durationFormatted": "0:02.549"
+    },
+    {
+      "id": "1757005444501",
+      "text": "Torianguru Dorima!",
+      "startTime": 164610,
+      "endTime": 166957,
+      "startTimeFormatted": "2:44.610",
+      "endTimeFormatted": "2:46.957",
+      "duration": 2347,
+      "durationFormatted": "0:02.347"
+    },
+    {
+      "id": "1757005620812",
+      "text": "Omae ga Ichiban! x3",
+      "startTime": 167301,
+      "endTime": 171854,
+      "startTimeFormatted": "2:47.301",
+      "endTimeFormatted": "2:51.854",
+      "duration": 4553,
+      "durationFormatted": "0:04.553"
+    },
+    {
+      "id": "1757005636910",
+      "text": "(Member Call)",
+      "startTime": 171881,
+      "endTime": 172826,
+      "startTimeFormatted": "2:51.881",
+      "endTimeFormatted": "2:52.826",
+      "duration": 945,
+      "durationFormatted": "0:00.945"
     }
   ],
   "metadata": {

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as NewRouteImport } from './routes/new'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChantIdRouteImport } from './routes/chant/$id'
 
 const NewRoute = NewRouteImport.update({
   id: '/new',
@@ -22,31 +23,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChantIdRoute = ChantIdRouteImport.update({
+  id: '/chant/$id',
+  path: '/chant/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/new': typeof NewRoute
+  '/chant/$id': typeof ChantIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/new': typeof NewRoute
+  '/chant/$id': typeof ChantIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/new': typeof NewRoute
+  '/chant/$id': typeof ChantIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/new'
+  fullPaths: '/' | '/new' | '/chant/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/new'
-  id: '__root__' | '/' | '/new'
+  to: '/' | '/new' | '/chant/$id'
+  id: '__root__' | '/' | '/new' | '/chant/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NewRoute: typeof NewRoute
+  ChantIdRoute: typeof ChantIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chant/$id': {
+      id: '/chant/$id'
+      path: '/chant/$id'
+      fullPath: '/chant/$id'
+      preLoaderRoute: typeof ChantIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NewRoute: NewRoute,
+  ChantIdRoute: ChantIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

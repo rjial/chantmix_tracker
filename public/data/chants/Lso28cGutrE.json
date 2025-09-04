@@ -1,0 +1,168 @@
+{
+  "song": {
+    "title": "Custom Song",
+    "artist": "Unknown Artist",
+    "youtubeVideoId": "Lso28cGutrE"
+  },
+  "lyrics": [
+    {
+      "id": "1756972924394",
+      "text": "(Sing Along)",
+      "startTime": 7286,
+      "endTime": 15085,
+      "startTimeFormatted": "0:07.286",
+      "endTimeFormatted": "0:15.085",
+      "duration": 7799,
+      "durationFormatted": "0:07.799"
+    },
+    {
+      "id": "1756972991944",
+      "text": "(Urya!) Oi! (Urya!) Oi! (Urya!) Oi! (Urya!) Oi!",
+      "startTime": 18117,
+      "endTime": 20424,
+      "startTimeFormatted": "0:18.117",
+      "endTimeFormatted": "0:20.424",
+      "duration": 2307,
+      "durationFormatted": "0:02.307"
+    },
+    {
+      "id": "1756973412310",
+      "text": "*clap* x4",
+      "startTime": 20745,
+      "endTime": 21960,
+      "startTimeFormatted": "0:20.745",
+      "endTimeFormatted": "0:21.960",
+      "duration": 1215,
+      "durationFormatted": "0:01.215"
+    },
+    {
+      "id": "1756973479720",
+      "text": "Jyaa ikuzo!",
+      "startTime": 22087,
+      "endTime": 22964,
+      "startTimeFormatted": "0:22.087",
+      "endTimeFormatted": "0:22.964",
+      "duration": 877,
+      "durationFormatted": "0:00.877"
+    },
+    {
+      "id": "1756974407482",
+      "text": "Tiger (Taiga)!",
+      "startTime": 23613,
+      "endTime": 23863,
+      "startTimeFormatted": "0:23.613",
+      "endTimeFormatted": "0:23.863",
+      "duration": 250,
+      "durationFormatted": "0:00.250"
+    },
+    {
+      "id": "1756974421182",
+      "text": "Fire (Faiya)!",
+      "startTime": 24337,
+      "endTime": 24533,
+      "startTimeFormatted": "0:24.337",
+      "endTimeFormatted": "0:24.533",
+      "duration": 196,
+      "durationFormatted": "0:00.196"
+    },
+    {
+      "id": "1756975426943",
+      "text": "Cyber (Saiba)!",
+      "startTime": 24990,
+      "endTime": 25240,
+      "startTimeFormatted": "0:24.990",
+      "endTimeFormatted": "0:25.240",
+      "duration": 250,
+      "durationFormatted": "0:00.250"
+    },
+    {
+      "id": "1756976074671",
+      "text": "Fiber (Faiba)!",
+      "startTime": 25720,
+      "endTime": 26020,
+      "startTimeFormatted": "0:25.720",
+      "endTimeFormatted": "0:26.020",
+      "duration": 300,
+      "durationFormatted": "0:00.300"
+    },
+    {
+      "id": "1756976105819",
+      "text": "Diver (Daiba)!",
+      "startTime": 26510,
+      "endTime": 26710,
+      "startTimeFormatted": "0:26.510",
+      "endTimeFormatted": "0:26.710",
+      "duration": 200,
+      "durationFormatted": "0:00.200"
+    },
+    {
+      "id": "1756981194226",
+      "text": "Viber (Baiba)!",
+      "startTime": 27019,
+      "endTime": 27219,
+      "startTimeFormatted": "0:27.019",
+      "endTimeFormatted": "0:27.219",
+      "duration": 200,
+      "durationFormatted": "0:00.200"
+    },
+    {
+      "id": "1756981207875",
+      "text": "Jya jya!",
+      "startTime": 27428,
+      "endTime": 28407,
+      "startTimeFormatted": "0:27.428",
+      "endTimeFormatted": "0:28.407",
+      "duration": 979,
+      "durationFormatted": "0:00.979"
+    },
+    {
+      "id": "1756981678092",
+      "text": "(Member call) x3",
+      "startTime": 28722,
+      "endTime": 35902,
+      "startTimeFormatted": "0:28.722",
+      "endTimeFormatted": "0:35.902",
+      "duration": 7180,
+      "durationFormatted": "0:07.180"
+    },
+    {
+      "id": "1756981719724",
+      "text": "Ore no (Member call)!",
+      "startTime": 36207,
+      "endTime": 38307,
+      "startTimeFormatted": "0:36.207",
+      "endTimeFormatted": "0:38.307",
+      "duration": 2100,
+      "durationFormatted": "0:02.100"
+    },
+    {
+      "id": "1756981883373",
+      "text": "(Member call) x3",
+      "startTime": 39242,
+      "endTime": 46342,
+      "startTimeFormatted": "0:39.242",
+      "endTimeFormatted": "0:46.342",
+      "duration": 7100,
+      "durationFormatted": "0:07.100"
+    },
+    {
+      "id": "1756981904086",
+      "text": "Ore no (Member call)!",
+      "startTime": 46637,
+      "endTime": 48903,
+      "startTimeFormatted": "0:46.637",
+      "endTimeFormatted": "0:48.903",
+      "duration": 2266,
+      "durationFormatted": "0:02.266"
+    }
+  ],
+  "metadata": {
+    "totalLyrics": 15,
+    "duration": 232000,
+    "durationFormatted": "3:52.000",
+    "exportedAt": "2025-09-04T10:34:49.577Z",
+    "contributor": "Rizal Abdul Basith",
+    "description": "Sample chant mix for demonstration",
+    "tags": ["sample", "demo"]
+  }
+}

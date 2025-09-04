@@ -35,12 +35,37 @@ const NewPage = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}.${ms.toString().padStart(3, '0')}`;
   };
 
+  const extractVideoId = (input: string): string => {
+    // Return as-is if it's already just a video ID (11 characters, alphanumeric)
+    if (/^[a-zA-Z0-9_-]{11}$/.test(input.trim())) {
+      return input.trim();
+    }
+
+    // YouTube URL patterns to extract video ID from
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([a-zA-Z0-9_-]{11})/,
+      /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/
+    ];
+
+    for (const pattern of patterns) {
+      const match = input.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+
+    // If no pattern matches, return the input as-is (might be a partial ID)
+    return input.trim();
+  }
+
+  const handleVideoIdChange = (input: string) => {
+    const extractedId = extractVideoId(input);
+    setVideoId(extractedId);
+  }
+
   const handleVideoLoad = () => {
     if (videoId.trim()) {
-      // Extract video ID from URL if needed
-      const match = videoId.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
-      const extractedId = match ? match[1] : videoId;
-      setVideoId(extractedId);
+      // Video will reload automatically when videoId changes
     }
   };
 
@@ -381,8 +406,8 @@ const NewPage = () => {
             <input
               type="text"
               value={videoId}
-              onChange={(e) => setVideoId(e.target.value)}
-              placeholder="Enter YouTube video ID or URL"
+              onChange={(e) => handleVideoIdChange(e.target.value)}
+              placeholder="YouTube Video ID or URL (e.g., dQw4w9WgXcQ or https://youtube.com/watch?v=dQw4w9WgXcQ)"
               className="flex-1 p-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
             <button
@@ -392,6 +417,22 @@ const NewPage = () => {
               Load
             </button>
           </div>
+          
+          {videoId && videoId.length === 11 && (
+            <div className="mt-4 p-2 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-md">
+              <p className="text-sm text-green-700 dark:text-green-300">
+                ✅ Video ID extracted: <span className="font-mono font-semibold">{videoId}</span>
+              </p>
+            </div>
+          )}
+          
+          {videoId && videoId.length !== 11 && videoId.length > 0 && (
+            <div className="mt-4 p-2 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded-md">
+              <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                ⚠️ Invalid video ID format. Please check your input.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Main Layout - Video Left, Lyrics Right */}

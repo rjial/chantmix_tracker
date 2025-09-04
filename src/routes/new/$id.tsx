@@ -361,7 +361,7 @@ function NewChantWithId() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pb-56">
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-4">
@@ -507,61 +507,6 @@ function NewChantWithId() {
                   <div><kbd className="bg-gray-200 dark:bg-gray-600 px-1 rounded">X</kbd> Next Lyric</div>
                   <div className="col-span-2"><kbd className="bg-gray-200 dark:bg-gray-600 px-1 rounded">Space</kbd> Play/Pause</div>
                 </div>
-              </div>
-            </div>
-
-            {/* Lyric Editor */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-                {editingLyric ? 'Edit Lyric' : 'Add Lyric'}
-              </h2>
-              
-              <div className="mb-4">
-                <textarea
-                  placeholder="Enter lyric text..."
-                  value={currentLyricText}
-                  onChange={(e) => setCurrentLyricText(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white h-24 resize-none"
-                />
-              </div>
-              
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-sm text-gray-600 dark:text-gray-300">Start Time:</span>
-                <span className="text-sm font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-800 dark:text-white">
-                  {lyricStartTime !== null ? formatTime(lyricStartTime) : formatTime(currentTime)}
-                </span>
-                <button
-                  onClick={captureCurrentTime}
-                  className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition-colors"
-                >
-                  Capture Current Time (Q)
-                </button>
-              </div>
-              
-              <div className="flex gap-2">
-                {editingLyric ? (
-                  <>
-                    <button
-                      onClick={saveEditedLyric}
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors"
-                    >
-                      Save Changes
-                    </button>
-                    <button
-                      onClick={cancelEdit}
-                      className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors"
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={addLyric}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
-                  >
-                    Add Lyric (W)
-                  </button>
-                )}
               </div>
             </div>
           </div>
@@ -775,6 +720,90 @@ function NewChantWithId() {
           </div>
         </div>
       )}
+
+      {/* Floating Lyric Input */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-3 shadow-lg z-40">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                {editingLyric ? 'Edit Lyric' : 'Add Lyric'}
+              </h3>
+              {editingLyric && (
+                <button
+                  onClick={cancelEdit}
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-sm"
+                >
+                  ✕ Cancel (Esc)
+                </button>
+              )}
+            </div>
+            
+            <div className="flex gap-4 items-end">
+              <div className="flex-1">
+                <textarea
+                  placeholder="Enter lyric text..."
+                  value={currentLyricText}
+                  onChange={(e) => setCurrentLyricText(e.target.value)}
+                  className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none h-12 resize-none"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      if (currentLyricText.trim()) {
+                        if (editingLyric) {
+                          saveEditedLyric();
+                        } else {
+                          addLyric();
+                        }
+                      }
+                    }
+                  }}
+                />
+              </div>
+              
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-gray-600 dark:text-gray-300">Start:</span>
+                <span className="font-mono bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-white text-xs">
+                  {formatTime(lyricStartTime ?? currentTime)}
+                </span>
+                <button
+                  onClick={captureCurrentTime}
+                  className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded text-sm transition-colors whitespace-nowrap"
+                >
+                  Mark (S)
+                </button>
+              </div>
+              
+              <div className="flex gap-2">
+                {editingLyric ? (
+                  <button
+                    onClick={saveEditedLyric}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    onClick={addLyric}
+                    disabled={!currentLyricText.trim()}
+                    className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded transition-colors"
+                  >
+                    Add
+                  </button>
+                )}
+              </div>
+            </div>
+            
+            {/* Keyboard shortcuts hint */}
+            <div className="mt-1 text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between">
+              <span>💡 Press Enter to add/update, S to mark start time, Esc to cancel</span>
+              <span className="text-gray-400 dark:text-gray-500">
+                {lyrics.length} lyrics • {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

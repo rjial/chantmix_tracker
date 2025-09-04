@@ -459,64 +459,78 @@ const NewPage = () => {
           </div>
 
           {/* Right: Lyrics Display */}
-          <div className="bg-gray-800 rounded-lg p-4 flex flex-col">
+          <div className={`rounded-lg p-4 flex flex-col ${
+            isEditorMode 
+              ? 'bg-gray-800'
+              : 'bg-black dark:bg-black overflow-hidden'
+          }`}>
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">Lyrics ({lyrics.length})</h3>
-              <div className="flex items-center space-x-2">
-                {isEditorMode && (
-                  <div className="flex items-center space-x-1 mr-2">
-                    <button
-                      onClick={jumpBackward}
-                      disabled={!videoId}
-                      className="bg-gray-600 hover:bg-gray-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors"
-                      title="Jump back 100ms (←)"
-                    >
-                      ⏪ -100ms
-                    </button>
-                    <button
-                      onClick={jumpForward}
-                      disabled={!videoId}
-                      className="bg-gray-600 hover:bg-gray-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors"
-                      title="Jump forward 100ms (→)"
-                    >
-                      ⏩ +100ms
-                    </button>
-                    <button
-                      onClick={() => setShowJsonModal(true)}
-                      disabled={lyrics.length === 0}
-                      className="bg-green-600 hover:bg-green-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors ml-1"
-                      title="View JSON data"
-                    >
-                      📄 JSON
-                    </button>
-                    <button
-                      onClick={() => setShowJsonLoader(true)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs font-medium transition-colors ml-1"
-                      title="Load JSON data"
-                    >
-                      📁 Load
-                    </button>
-                    <button
-                      onClick={markStartTime}
-                      disabled={!videoId}
-                      className="bg-orange-600 hover:bg-orange-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors ml-1"
-                      title="Mark start time (S)"
-                    >
-                      📍 Start
-                    </button>
+              {!isEditorMode ? (
+                <h3 className="text-lg font-semibold text-white text-center w-full">
+                  🎤 Karaoke ({lyrics.length})
+                </h3>
+              ) : (
+                <>
+                  <h3 className="text-lg font-semibold text-white">
+                    Lyrics ({lyrics.length})
+                  </h3>
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1 mr-2">
+                      <button
+                        onClick={jumpBackward}
+                        disabled={!videoId}
+                        className="bg-gray-600 hover:bg-gray-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors"
+                        title="Jump back 100ms (←)"
+                      >
+                        ⏪ -100ms
+                      </button>
+                      <button
+                        onClick={jumpForward}
+                        disabled={!videoId}
+                        className="bg-gray-600 hover:bg-gray-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors"
+                        title="Jump forward 100ms (→)"
+                      >
+                        ⏩ +100ms
+                      </button>
+                      <button
+                        onClick={() => setShowJsonModal(true)}
+                        disabled={lyrics.length === 0}
+                        className="bg-green-600 hover:bg-green-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors ml-1"
+                        title="View JSON data"
+                      >
+                        📄 JSON
+                      </button>
+                      <button
+                        onClick={() => setShowJsonLoader(true)}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs font-medium transition-colors ml-1"
+                        title="Load JSON data"
+                      >
+                        📁 Load
+                      </button>
+                      <button
+                        onClick={markStartTime}
+                        disabled={!videoId}
+                        className="bg-orange-600 hover:bg-orange-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white px-2 py-1 rounded text-xs font-medium transition-colors ml-1"
+                        title="Mark start time (S)"
+                      >
+                        📍 Start
+                      </button>
+                    </div>
                   </div>
-                )}
-                <button
-                  onClick={() => setIsEditorMode(!isEditorMode)}
-                  className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-                    isEditorMode 
-                      ? 'bg-purple-600 hover:bg-purple-700 text-white' 
-                      : 'bg-blue-600 hover:bg-blue-700 text-white'
-                  }`}
-                >
-                  {isEditorMode ? '👁️ View Mode' : '✏️ Edit Mode'}
-                </button>
-              </div>
+                </>
+              )}
+              
+              {/* Always visible toggle button */}
+              <button
+                onClick={() => setIsEditorMode(!isEditorMode)}
+                className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                  isEditorMode 
+                    ? 'bg-purple-600 hover:bg-purple-700 text-white' 
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                } ${!isEditorMode ? 'absolute top-4 right-4' : ''}`}
+              >
+                {isEditorMode ? '👁️ View Mode' : '✏️ Edit Mode'}
+              </button>
             </div>
 
             {isEditorMode && videoId && (
@@ -596,27 +610,43 @@ const NewPage = () => {
                     ))}
                   </div>)
                 ) : (
-                  // View Mode - Floating text without cards
-                  (<div className="space-y-4 text-center">
-                    {lyrics.map((lyric) => (
-                      <div
-                        key={lyric.id}
-                        onClick={() => jumpToLyric(lyric.startTime)}
-                        className={`cursor-pointer transition-all duration-300 ${
-                          currentLyric?.id === lyric.id
-                            ? 'text-2xl font-bold text-white drop-shadow-lg transform scale-110'
-                            : 'text-lg text-gray-400 hover:text-gray-300'
-                        }`}
-                        style={{
-                          textShadow: currentLyric?.id === lyric.id 
-                            ? '2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(59, 130, 246, 0.5)' 
-                            : '1px 1px 2px rgba(0,0,0,0.5)'
-                        }}
-                      >
-                        {lyric.text}
-                      </div>
-                    ))}
-                  </div>)
+                  // View Mode - Karaoke style without cards  
+                  <div className="flex flex-col justify-center min-h-full py-48 px-8 bg-gradient-to-b from-black via-gray-900 to-black">
+                    {lyrics.map((lyric) => {
+                      const isActive = currentLyric?.id === lyric.id
+                      const isPrevious = lyrics.findIndex(l => l.id === lyric.id) < lyrics.findIndex(l => l.id === currentLyric?.id)
+                      const isNext = lyrics.findIndex(l => l.id === lyric.id) > lyrics.findIndex(l => l.id === currentLyric?.id)
+                      
+                      return (
+                        <div
+                          key={lyric.id}
+                          onClick={() => jumpToLyric(lyric.startTime)}
+                          className={`cursor-pointer transition-all duration-500 ease-in-out text-center py-3 px-4 ${
+                            isActive 
+                              ? 'text-2xl md:text-3xl font-bold text-white drop-shadow-lg transform scale-105' 
+                              : isPrevious
+                              ? 'text-lg text-gray-500 opacity-60'
+                              : isNext
+                              ? 'text-lg text-gray-400 opacity-70 hover:text-gray-300 hover:opacity-90'
+                              : 'text-lg text-gray-400 opacity-70 hover:text-gray-300 hover:opacity-90'
+                          }`}
+                          style={{
+                            textShadow: isActive 
+                              ? '0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4), 2px 2px 4px rgba(0,0,0,0.8)' 
+                              : '1px 1px 2px rgba(0,0,0,0.8)',
+                            lineHeight: isActive ? '1.2' : '1.4'
+                          }}
+                        >
+                          {lyric.text}
+                          {isActive && (
+                            <div className="text-xs text-blue-300 mt-2 font-normal opacity-75">
+                              {formatTimeWithMilliseconds(lyric.startTime)} - {formatTimeWithMilliseconds(lyric.endTime)}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
                 )
               ) : (
                 <div className="text-center py-8 text-gray-400">

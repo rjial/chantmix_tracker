@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/chantmix_tracker/' : '/',
   plugins: [
     tanstackRouter({
       target: 'react',
@@ -18,4 +19,4 @@ export default defineConfig({
       '@': '/src',
     },
   },
-})
+}))

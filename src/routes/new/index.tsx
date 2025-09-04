@@ -390,6 +390,22 @@ const NewPage = () => {
 
   const currentLyric = getCurrentLyric();
 
+  // Auto-scroll to current lyric in karaoke mode
+  useEffect(() => {
+    if (!isEditorMode && currentLyric) {
+      const element = document.getElementById(`lyric-${currentLyric.id}`);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+          });
+        }, 100);
+      }
+    }
+  }, [currentLyric, isEditorMode]);
+
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-6">
@@ -459,7 +475,7 @@ const NewPage = () => {
           </div>
 
           {/* Right: Lyrics Display */}
-          <div className={`rounded-lg p-4 flex flex-col ${
+          <div className={`rounded-lg p-4 flex flex-col h-120 ${
             isEditorMode 
               ? 'bg-gray-800'
               : 'bg-black dark:bg-black overflow-hidden'
@@ -611,7 +627,7 @@ const NewPage = () => {
                   </div>)
                 ) : (
                   // View Mode - Karaoke style without cards  
-                  <div className="flex flex-col justify-center min-h-full py-48 px-8 bg-gradient-to-b from-black via-gray-900 to-black">
+                  <div className="flex flex-col justify-center min-h-full py-8 px-8 bg-gradient-to-b from-black via-gray-900 to-black">
                     {lyrics.map((lyric) => {
                       const isActive = currentLyric?.id === lyric.id
                       const isPrevious = lyrics.findIndex(l => l.id === lyric.id) < lyrics.findIndex(l => l.id === currentLyric?.id)
@@ -620,6 +636,7 @@ const NewPage = () => {
                       return (
                         <div
                           key={lyric.id}
+                          id={`lyric-${lyric.id}`}
                           onClick={() => jumpToLyric(lyric.startTime)}
                           className={`cursor-pointer transition-all duration-300 ease-out text-center py-3 px-4 ${
                             isActive 

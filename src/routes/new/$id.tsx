@@ -561,7 +561,7 @@ function NewChantWithId() {
                 </div>
               </div>
               
-              <div className={`${isEditorMode ? 'p-6' : ''} h-[600px] overflow-y-auto scrollbar-hide`}>
+              <div className={`${isEditorMode ? 'p-6' : ''} h-[315px] overflow-y-auto scrollbar-hide`}>
                 {lyrics.length === 0 ? (
                   <div className="flex items-center justify-center h-full">
                     <div className="text-center">
@@ -641,7 +641,7 @@ function NewChantWithId() {
                     </div>
                   ) : (
                     // View Mode - Karaoke style
-                    <div className="flex flex-col justify-center min-h-full py-48 px-8 bg-gradient-to-b from-black via-gray-900 to-black">
+                    <div className="flex flex-col justify-center min-h-full py-8 px-8 bg-gradient-to-b from-black via-gray-900 to-black">
                       {lyrics.sort((a, b) => a.startTime - b.startTime).map((lyric, index) => {
                         const isCurrentLyric = currentLyricIndex === index;
                         const isPrevious = index < currentLyricIndex;

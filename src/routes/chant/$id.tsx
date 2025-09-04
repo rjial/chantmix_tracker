@@ -337,7 +337,7 @@ function ChantPlayer() {
               </p>
             </div>
             
-            <div className="h-[600px] overflow-y-auto scrollbar-hide lyrics-container bg-gradient-to-b from-black via-gray-900 to-black" style={{ scrollBehavior: 'smooth' }}>
+            <div className="h-[315px] overflow-y-auto scrollbar-hide lyrics-container bg-gradient-to-b from-black via-gray-900 to-black" style={{ scrollBehavior: 'smooth' }}>
               {chantData.lyrics.length === 0 ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="text-center">
@@ -346,7 +346,7 @@ function ChantPlayer() {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col justify-center min-h-full py-48 px-8">
+                <div className="flex flex-col justify-center min-h-full py-8 px-8">
                   {chantData.lyrics.map((lyric, index) => {
                     const isActive = index === currentLyricIndex
                     const isPrevious = index < currentLyricIndex

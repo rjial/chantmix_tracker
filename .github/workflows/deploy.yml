@@ -32,6 +32,9 @@ jobs:
       - name: Build application
         run: pnpm run build
         
+      - name: Add build indicator
+        run: echo "Static site built by GitHub Actions" > ./dist/.cloudflare-static
+        
       - name: Deploy to target repository
         uses: peaceiris/actions-gh-pages@v3
         with:

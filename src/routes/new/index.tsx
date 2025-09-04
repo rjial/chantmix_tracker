@@ -516,7 +516,7 @@ const NewPage = () => {
               {lyrics.length > 0 ? (
                 isEditorMode ? (
                   // Editor Mode - Card-based with backgrounds
-                  <div className="space-y-2">
+                  (<div className="space-y-2">
                     {lyrics.map((lyric) => (
                       <div
                         key={lyric.id}
@@ -553,10 +553,10 @@ const NewPage = () => {
                         </div>
                       </div>
                     ))}
-                  </div>
+                  </div>)
                 ) : (
                   // View Mode - Floating text without cards
-                  <div className="space-y-4 text-center">
+                  (<div className="space-y-4 text-center">
                     {lyrics.map((lyric) => (
                       <div
                         key={lyric.id}
@@ -575,7 +575,7 @@ const NewPage = () => {
                         {lyric.text}
                       </div>
                     ))}
-                  </div>
+                  </div>)
                 )
               ) : (
                 <div className="text-center py-8 text-gray-400">
@@ -827,10 +827,10 @@ const NewPage = () => {
         )}
       </div>
     </div>
-  );
+  )
 };
 
-export const Route = createFileRoute("/new")({
+export const Route = createFileRoute("/new/")({
   component: NewPage,
 })
 

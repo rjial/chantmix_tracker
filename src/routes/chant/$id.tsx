@@ -140,17 +140,42 @@ function ChantPlayer() {
 
   if (error || !chantData) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-red-500 text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Chant Not Found</h2>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <Link
-            to="/"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
-          >
-            Back to Home
-          </Link>
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="text-red-500 text-6xl mb-4">🎵</div>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Chant Not Found</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            {error === 'Chant not found' 
+              ? `The chant with ID "${id}" doesn't exist yet.`
+              : error
+            }
+          </p>
+          
+          <div className="space-y-3">
+            {error === 'Chant not found' && (
+              <Link
+                to="/new/$id"
+                params={{ id }}
+                className="block bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded transition-colors"
+              >
+                Create Chant "{id}"
+              </Link>
+            )}
+            
+            <Link
+              to="/"
+              className="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded transition-colors"
+            >
+              Back to Home
+            </Link>
+            
+            <Link
+              to="/new"
+              className="block bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded transition-colors"
+            >
+              Create New Chant
+            </Link>
+          </div>
         </div>
       </div>
     )

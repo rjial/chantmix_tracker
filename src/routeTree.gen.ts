@@ -9,18 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as NewRouteImport } from './routes/new'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NewIndexRouteImport } from './routes/new/index'
+import { Route as NewIdRouteImport } from './routes/new/$id'
 import { Route as ChantIdRouteImport } from './routes/chant/$id'
 
-const NewRoute = NewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewIndexRoute = NewIndexRouteImport.update({
+  id: '/new/',
+  path: '/new/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewIdRoute = NewIdRouteImport.update({
+  id: '/new/$id',
+  path: '/new/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChantIdRoute = ChantIdRouteImport.update({
@@ -31,48 +37,59 @@ const ChantIdRoute = ChantIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/new': typeof NewRoute
   '/chant/$id': typeof ChantIdRoute
+  '/new/$id': typeof NewIdRoute
+  '/new': typeof NewIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/new': typeof NewRoute
   '/chant/$id': typeof ChantIdRoute
+  '/new/$id': typeof NewIdRoute
+  '/new': typeof NewIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/new': typeof NewRoute
   '/chant/$id': typeof ChantIdRoute
+  '/new/$id': typeof NewIdRoute
+  '/new/': typeof NewIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/new' | '/chant/$id'
+  fullPaths: '/' | '/chant/$id' | '/new/$id' | '/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/new' | '/chant/$id'
-  id: '__root__' | '/' | '/new' | '/chant/$id'
+  to: '/' | '/chant/$id' | '/new/$id' | '/new'
+  id: '__root__' | '/' | '/chant/$id' | '/new/$id' | '/new/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  NewRoute: typeof NewRoute
   ChantIdRoute: typeof ChantIdRoute
+  NewIdRoute: typeof NewIdRoute
+  NewIndexRoute: typeof NewIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/new': {
-      id: '/new'
-      path: '/new'
-      fullPath: '/new'
-      preLoaderRoute: typeof NewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/new/': {
+      id: '/new/'
+      path: '/new'
+      fullPath: '/new'
+      preLoaderRoute: typeof NewIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/new/$id': {
+      id: '/new/$id'
+      path: '/new/$id'
+      fullPath: '/new/$id'
+      preLoaderRoute: typeof NewIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chant/$id': {
@@ -87,8 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  NewRoute: NewRoute,
   ChantIdRoute: ChantIdRoute,
+  NewIdRoute: NewIdRoute,
+  NewIndexRoute: NewIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

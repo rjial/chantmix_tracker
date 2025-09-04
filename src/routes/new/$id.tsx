@@ -652,14 +652,14 @@ function NewChantWithId() {
                             key={lyric.id}
                             id={`lyric-${lyric.id}`}
                             onClick={() => seekTo(lyric.startTime)}
-                            className={`cursor-pointer transition-all duration-500 ease-in-out text-center py-3 px-4 ${
+                            className={`cursor-pointer transition-all duration-300 ease-out text-center py-3 px-4 ${
                               isCurrentLyric 
-                                ? 'text-2xl md:text-3xl font-bold text-white drop-shadow-lg transform scale-105' 
+                                ? 'text-2xl md:text-3xl font-bold text-white drop-shadow-lg translate-x-0' 
                                 : isPrevious
-                                ? 'text-lg text-gray-500 opacity-60'
+                                ? 'text-lg text-gray-500 opacity-60 translate-x-[-8px]'
                                 : isNext
-                                ? 'text-lg text-gray-400 opacity-70 hover:text-gray-300 hover:opacity-90'
-                                : 'text-lg text-gray-400 opacity-70 hover:text-gray-300 hover:opacity-90'
+                                ? 'text-lg text-gray-400 opacity-70 translate-x-[8px] hover:text-gray-300 hover:opacity-90 hover:translate-x-[4px]'
+                                : 'text-lg text-gray-400 opacity-70 translate-x-[8px] hover:text-gray-300 hover:opacity-90 hover:translate-x-[4px]'
                             }`}
                             style={{
                               textShadow: isCurrentLyric 

@@ -93,7 +93,7 @@ const LyricsDisplay: React.FC<LyricsDisplayProps> = ({
               className={`
                 group lyric-line p-3 rounded-lg transition-all duration-300 ease-in-out relative cursor-pointer
                 ${isCurrentlyPlaying
-                  ? 'bg-blue-600 text-white scale-105 shadow-lg font-semibold'
+                  ? 'bg-blue-600 text-white shadow-lg font-semibold translate-x-1'
                   : isPassed
                   ? 'bg-gray-700 text-gray-300'
                   : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200'

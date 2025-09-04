@@ -79,13 +79,20 @@ function ChantPlayer() {
     setCurrentLyricIndex(current)
   }, [currentTime, chantData?.lyrics])
 
-  // Auto-scroll to current lyric
+  // Auto-scroll to current lyric with better centering
   useEffect(() => {
     if (currentLyricIndex >= 0 && chantData?.lyrics) {
       const currentLyric = chantData.lyrics[currentLyricIndex]
       const element = document.getElementById(`lyric-${currentLyric.id}`)
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        // Use a small delay to ensure DOM is updated
+        setTimeout(() => {
+          element.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+          })
+        }, 100)
       }
     }
   }, [currentLyricIndex, chantData?.lyrics])
@@ -310,19 +317,19 @@ function ChantPlayer() {
           </div>
 
           {/* Right Column - Lyrics */}
-          <div className="bg-white rounded-lg shadow-md">
-            <div className="p-6 border-b">
-              <h3 className="text-lg font-semibold">Lyrics ({chantData.lyrics.length})</h3>
-              <p className="text-sm text-gray-600 mt-1">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+            <div className="p-6 border-b dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Lyrics ({chantData.lyrics.length})</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                 Click on any lyric to jump to that moment
               </p>
             </div>
             
-            <div className="p-6 max-h-[600px] overflow-y-auto scrollbar-hide">
+            <div className="p-6 h-[600px] overflow-y-auto scrollbar-hide lyrics-container" style={{ scrollBehavior: 'smooth' }}>
               {chantData.lyrics.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">No lyrics available for this chant.</p>
+                <p className="text-gray-500 dark:text-gray-400 text-center py-8">No lyrics available for this chant.</p>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-3 py-48"> {/* Add padding to allow centering of first/last items */}
                   {chantData.lyrics.map((lyric, index) => {
                     const isActive = index === currentLyricIndex
                     
@@ -331,17 +338,17 @@ function ChantPlayer() {
                         key={lyric.id}
                         id={`lyric-${lyric.id}`}
                         onClick={() => jumpToLyric(lyric)}
-                        className={`p-4 rounded-lg cursor-pointer transition-all duration-200 ${
+                        className={`p-4 rounded-lg cursor-pointer transition-all duration-300 lyric-line ${
                           isActive 
-                            ? 'bg-blue-100 border-2 border-blue-400 shadow-md transform scale-105' 
-                            : 'bg-gray-50 border border-gray-200 hover:bg-gray-100 hover:border-gray-300'
+                            ? 'bg-blue-100 dark:bg-blue-900 border-2 border-blue-400 shadow-lg transform scale-105 text-blue-900 dark:text-blue-100' 
+                            : 'bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 hover:border-gray-300 dark:hover:border-gray-500 text-gray-700 dark:text-gray-300'
                         }`}
                       >
                         <div className="flex justify-between items-start gap-3">
-                          <p className={`flex-1 ${isActive ? 'text-blue-900 font-semibold' : 'text-gray-700'}`}>
+                          <p className={`flex-1 ${isActive ? 'font-semibold' : ''}`}>
                             {lyric.text}
                           </p>
-                          <div className="text-xs text-gray-500 text-right">
+                          <div className="text-xs text-gray-500 dark:text-gray-400 text-right">
                             <div>{formatTime(lyric.startTime)}</div>
                             <div>→ {formatTime(lyric.endTime)}</div>
                           </div>

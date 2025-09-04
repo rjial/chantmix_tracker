@@ -1,0 +1,5 @@
+# Cloudflare Pages configuration
+# Since files are pre-built by GitHub Actions, no build is needed
+
+[env.production]
+# No environment variables needed for static site

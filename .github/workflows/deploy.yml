@@ -29,9 +29,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
         
-      - name: Generate route tree
-        run: pnpm exec tsr generate
-        
       - name: Build application
         run: pnpm run build
         

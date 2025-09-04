@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
 import { getAssetPath } from '@/utils/basePath'
+import ThemeToggle from '@/components/ThemeToggle'
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -75,16 +76,17 @@ function Index() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">YouTube Chant Mix</h1>
-              <p className="text-gray-600 mt-1">Discover and play synchronized chant lyrics</p>
+              <h1 className="text-3xl font-bold text-gray-800 dark:text-white">YouTube Chant Mix</h1>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">Discover and play synchronized chant lyrics</p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
               <Link
                 to="/new"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
@@ -111,10 +113,10 @@ function Index() {
               placeholder="Search chants by title, contributor, tags, or description..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             />
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
@@ -146,7 +148,7 @@ function Index() {
         ) : (
           <>
             <div className="mb-6">
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
                 {searchTerm ? `Search Results (${filteredChants.length})` : `All Chants (${filteredChants.length})`}
               </h2>
             </div>
@@ -155,24 +157,24 @@ function Index() {
               {filteredChants.map((chant) => (
                 <div
                   key={chant.id}
-                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
                 >
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-lg font-semibold text-gray-800 line-clamp-2 flex-1">
+                      <h3 className="text-lg font-semibold text-gray-800 dark:text-white line-clamp-2 flex-1">
                         {chant.title}
                       </h3>
                     </div>
                     
                     <div className="mb-3">
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
                         <span className="font-medium">By:</span> {chant.contributor}
                       </p>
                     </div>
 
                     {chant.description && (
                       <div className="mb-3">
-                        <p className="text-sm text-gray-600 line-clamp-2">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
                           {chant.description}
                         </p>
                       </div>
